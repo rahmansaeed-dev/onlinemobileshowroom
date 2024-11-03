@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        {% block title %} base page {% endblock %}
+
+    </head>
+    {% endblock %}
+<body>  
+
+   <!-- Navbar  -->
+   {% block navbar %}  
+  <div class="navbar">
+    <nav>
+      <div class="wrapper">
+        <div class="logo"><a href="">MShop</a></div>
+        <input type="radio" name="slider" id="menu-btn">
+        <input type="radio" name="slider" id="close-btn">
+        
+        <ul class="nav-links">
+          <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+
+          <li>
+            </li>
+            <input type="checkbox" id="showDrop">
+            <label for="showDrop" class="mobile-item">Dropdown Menu</label>
+            <ul class="drop-menu">
+              <li><a href="#">Drop menu 1</a></li>
+              <li><a href="#">Drop menu 2</a></li>
+            </ul>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'company' %}">Home</a></li>
+
+          <li>
+              <li><a href="{% url 'showcart' %}" class="desktop-item">Cart</a></li>
+
+            <li><a href="{% url 'logout' %}" class="desktop-item">Logout</a></li>
+            <input type="checkbox" id="showMega">
+            <label for="showMega" class="mobile-item">Mega Menu</label>
+            <div class="mega-box">
+              <div class="content">
+                <div class="row">
+                  <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="">
+                </div>
+                <div class="row">
+                  <header>Design Services</header>
+                  <ul class="mega-links">
+                    <li><a href="#">Graphics</a></li>
+                    <li><a href="#">Vectors</a></li>
+                    <li><a href="#">Business cards</a></li>
+                    <li><a href="#">Custom logo</a></li>
+                  </ul>
+                </div>
+                <div class="row">
+                  <header>Email Services</header>
+                  <ul class="mega-links">
+                    <li><a href="#">Personal Email</a></li>
+                    <li><a href="#">Business Email</a></li>
+                    <li><a href="#">Mobile Email</a></li>
+                    <li><a href="#">Web Marketing</a></li>
+                  </ul>
+                </div>
+                <div class="row">
+                  <header>Security services</header>
+                  <ul class="mega-links">
+                    <li><a href="#">Site Seal</a></li>
+                    <li><a href="#">VPS Hosting</a></li>
+                    <li><a href="#">Privacy Seal</a></li>
+                    <li><a href="#">Website design</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li><a href="">Welcome! <strong style="color: yellow;">{{ request.user.first_name|capfirst }} </strong></a></li>
+          {% else %}
+          <li><a href="{% url 'company' %}">Home</a></li>
+          <li><a href="{% url 'login_user' %}">Login</a></li>
+          <li><a href="{% url 'register' %}">Register</a></li>
+          {% endif %}
+        </ul>
+        <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+      </div>
+    </nav>
+  </div>
+
+   {% endblock %}
+   
+    <!-- hero section  -->
+   {% block hero %}
+  <!-- hero section start  -->
+
+  <div class="hero-section">
+    <img src="../static/img/xiaomi_14t_desktop_banner_2.jpg" alt="">
+ 
+  </div><br><br>
+   {% endblock %}
+  <!-- Product section  -->
+   {% block product %}
+   <div class="product-section">
+    <div class="product-heading">
+      <h2>Our Products</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+      <form action="" method="get">
+        <input type="text" name="servicename" value="">
+        <input type="submit" value="Search"/>
+    </form>
+    </div>
+   </div><br><br>
+
+   <div class="row">
+    {% if company %}
+    {% for comp in company %}
+    <div class="col-lg-4 col-md-6 text-center">
+      <div class="single-product-item">
+        <div class="product-image">
+          <img src="{{comp.company_image.url}}" alt="product image">
+
+        </div>
+        <h3>{{comp.name}}</h3>
+        <p>{{comp.description}}</p>
+  
+        <a href="{% url 'shop' comp.id  %}" class="cart-btn-home">Browse</a><br>
+      </div>
+    </div><br>
+    {% endfor %}
+    {% endif %}
+   
+  </div>
+ 
+   {% endblock %}
+
+    <!-- footer section  --> 
+    {% block footer %}
+        <footer>
+        <div class="foot-panel1">
+            Back to top 
+        </div>
+
+        <div class="foot-panel2">
+            <ul>
+                <p>Get to Know Us</p>
+                <a href="">Career</a>
+                <a href="">Blogs</a>
+                <a href="">About Amazon</a>
+                <a href="">Investor Relations</a>
+                <a href="">Amazon Devices</a>
+                <a href="">Amazon Science</a>
+            </ul>
+            <ul>
+                <p>Get to Know Us</p>
+                <a href="">Career</a>
+                <a href="">Blogs</a>
+                <a href="">About Amazon</a>
+                <a href="">Investor Relations</a>
+                <a href="">Amazon Devices</a>
+                <a href="">Amazon Science</a>
+            </ul>
+            <ul>
+                <p>Get to Know Us</p>
+                <a href="">Career</a>
+                <a href="">Blogs</a>
+                <a href="">About Amazon</a>
+                <a href="">Investor Relations</a>
+                <a href="">Amazon Devices</a>
+                <a href="">Amazon Science</a>
+            </ul>
+            <ul>
+                <p>Get to Know Us</p>
+                <a href="">Career</a>
+                <a href="">Blogs</a>
+                <a href="">About Amazon</a>
+                <a href="">Investor Relations</a>
+                <a href="">Amazon Devices</a>
+                <a href="">Amazon Science</a>
+            </ul>
+        </div>
+
+        <div class="foot-panel3">
+            <div class="logo">
+
+            </div>
+        </div>
+
+        <div class="foot-panel4">
+            <div class="pages">
+                <a href="">Conditions of use</a>
+                <a href="">Privacy Notice</a>
+                <a href="">Your Ads Privacy choices</a>
+            </div>
+            <div class="copy-right">
+                1996-2024, Amazon.com, Inc. or its affilance
+            </div>
+        </div>
+        </footer>
+    {% endblock %}
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/poper.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

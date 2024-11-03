@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <div class="container1">
+        <div class="form-container">
+            <p class="title">Login</p>
+            <form class="form" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="" name="email" required>  
+                    {% if messages %}
+                            {% for message in messages %}
+                                <small {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: yellow;">{{ message }}</small>
+                            {% endfor %}
+                    {% endif %}
+                </div>
+    
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="" required>
+                    <div class="forgot">
+                        <a rel="noopener noreferrer" href="{% url 'password_reset' %}">Forgot Password ?</a>
+                    </div>
+                    
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+            <br>
+            <p class="signup">Don't have an account?
+                <a rel="noopener noreferrer" href="{% url 'register' %}" class="">Register Here!</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

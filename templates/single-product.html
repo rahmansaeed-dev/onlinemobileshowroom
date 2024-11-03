@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %} single product {% endblock %}
+
+</head>
+<body>
+    <!-- block hero section  -->
+	{% block hero %}
+	{% endblock %}
+    <!-- single product -->
+    {% block product %}
+	<div class="product-heading pt-120">
+		<h2>Single Product</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+	  </div>
+	 </div>
+    {% if mobile %}
+		<div class="single-product mt-200 mb-150" style="margin-top: 80px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5">
+						<div class="single-product-img">
+							<img src="{{mobile.image.url}}" alt="single-product image">
+						</div>
+						<div class="small-img">
+							<img src="{{mobile.image1.url}}" alt="img1">
+							<img src="{{mobile.image2.url}}" alt="img2">
+							<img src="{{mobile.image3.url}}" alt="img3">
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="single-product-content">
+							<h2>{{ mobile.name }}</h2>
+							<p class="single-product-pricing">Rs. {{mobile.price}}</p>
+							<p class="single-product-description">Description : {{ mobile.description }}</p>
+							<div class="single-product-form">
+
+								     <!-- add to cart  -->
+									 <form action="/cart">
+										<input type="hidden" name="mobile_id" value="{{ mobile.id }}" id="mobile_id">
+										<button type="submit" class="btn btn-primary shadow px-5 py-2 ">Add to Cart</button>
+									</form><br>
+								<p><strong>Categories: </strong>Mobiles, Electronics</p>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	<!-- end single product -->
+    {% endblock %}
+</body>
+</html>
+

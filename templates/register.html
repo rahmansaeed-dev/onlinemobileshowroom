@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Here</title>
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <div class="container1">
+        <div class="form-container">
+            <p class="title">Register Your Self</p>
+            <form class="form" method="post">
+                {% csrf_token %}
+    
+                <div class="input-group">
+                    <label for="First name">First name</label>
+                    <input type="text" name="firstname" id="first name" placeholder="" name="first name" required>
+                </div>
+    
+                <div class="input-group">
+                    <label for="Last name">Last name</label>
+                    <input type="text" name="lastname" id="last name" placeholder="" name="last name" required>
+                </div>
+    
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="" name="email" required>
+    
+                    <!-- messages  -->
+                    
+                        {% if messages %}
+                            {% for message in messages %}
+                                <small {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: yellow;">{{ message }}</small>
+                            {% endfor %}
+                        {% endif %}
+                
+                </div>
+    
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="" required>
+                    <div class="forgot">
+                        <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
+                    </div>
+                    
+                </div>
+                <button type="submit" >Submit</button>
+                
+            </form>
+            <br>
+
+            <p class="signup">Don't have an account?
+                <a rel="noopener noreferrer" href="{% url 'login_user' %}" class="">Login</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
